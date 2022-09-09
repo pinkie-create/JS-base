@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body style="font-size: 25px; width: 1160px; margin: auto;">
+    <h4 style="color: rgb(116, 0, 0);">Задание 1. Для практикума из занятия 7 продумать, где можно применить замыкания.
+    </h4>
+    <b>Функция замыкания для перемещения змейки за пределы границ:</b><br>
+    <br>
+    <span style="font-size: 28px;">function coordXY(newUnit) { <br>
+
+        return function (arg1, arg2, arg3, arg4) { <br>
+        <br>
+        if (new_unit == newUnit && direction == arg1) { <br>
+        new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (FIELD_SIZE_X - 1))[0]; <br>
+        <br>
+        } else if (new_unit == newUnit && direction == arg2) { <br>
+        new_unit = document.getElementsByClassName('cell-' + (coord_y) + '-' + (0))[0]; <br>
+        <br>
+        } else if (new_unit == newUnit && direction == arg3) { <br>
+        new_unit = document.getElementsByClassName('cell-' + (FIELD_SIZE_Y - 1) + '-' + (coord_x))[0]; <br>
+        <br>
+        } else if (new_unit == newUnit && direction == arg4) { <br>
+        new_unit = document.getElementsByClassName('cell-' + (0) + '-' + (coord_x))[0]; <br>
+        } <br>
+        } <br>
+        } <br>
+        var s = coordXY(undefined); <br>
+        s('x-', 'x+', 'y+', 'y-'); <br></span>
+
+    <h4 style="color: rgb(116, 0, 0);">Задание 2. Не выполняя кода, ответить, что выведет браузер и почему:</h4>
+
+    <span style="font-size: 28px;">
+        if (!("a" in window)) { <br>
+        var a = 1; <br>
+        } <br>
+        alert(a); <br></span><br>
+    <b> В данном примере браузер выведет undefined потому что по условию if строка должна быть неистинной, т.е. без
+        значения, а
+        она имеет числовое значение 1, значит условие не соблюдается, а на этот случай условия вывода нет (undefined),
+        что и
+        выводится в alert.</b>
+    <hr>
+    <span style="font-size: 28px;">
+        var b = function a(x) { <br>
+        x && a(--x); <br>
+        }; <br>
+        alert(a); <br></span><br>
+    <b>В данном примере браузер не выведет ничего, т.к. "а" - это имя функции и в теле функции не определено какое-либо
+        действие.</b>
+    <hr>
+    <span style="font-size: 28px;">
+        function a(x) { <br>
+        return x * 2; <br>
+        } <br>
+        var a; <br>
+        alert(a); <br></span><br>
+    <b>В данном примере браузер не выведет ничего, т.к. переменная "a" объявлена без указания значения, а значит в
+        "alert" выводится функция "а", для которой значение переменной "x", указанной в функции, отсутствует.</b>
+    <hr>
+    <span style="font-size: 28px;">
+        function b(x, y, a) { <br>
+        arguments[2] = 10; <br>
+        alert(a); <br>
+        } <br>
+        b(1, 2, 3);<br></span><br>
+    <b>В данном примере браузер выведет в "alert" значение третьего аргумента, которому присвоено значение 10 в теле
+        функции.</b>
+    <hr>
+    <span style="font-size: 28px;">
+        function a() { <br>
+        alert(this); <br>
+        } <br>
+        a.call(null);<br></span><br>
+    <b>Слово "this" обозначает объект, который запускает данную функцию. здесь объект отсутствует, значит "this" ничего
+        не
+        обозначает. Браузер понимает, что должен бытьобъект, но не видит какой. В "flert" будет указано, что это объект
+        без
+        названия.</b>
+    <hr>
+</body>
+
+</html>

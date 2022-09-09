@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #img {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        #img img {
+            border: 1px solid #000;
+            cursor: pointer;
+        }
+
+        body {
+            text-align: center;
+        }
+
+        body>img {
+            width: 30%;
+            border: 3px solid #000;
+            margin-top: 100px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    1. Доработать функцию замены картинки в галерее таким образом, чтобы она проверяла наличие картинки по указанному в
+    src адресу.
+
+    <div id='img'>
+        <img src='img/small/toy0.jpg'>
+        <img src='img/small/toy1.jpg'>
+        <img src='img/small/toy2.jpg'>
+        <img src='img/small/toy3.jpg'>
+    </div>
+    <div>
+        <img id='imgBig' src="">
+    </div>
+
+    <script>
+        var arrayToy = document.querySelectorAll('img');
+        for (var i = 0; i < arrayToy.length; i++) {
+            arrayToy[i].onclick = function (e) {
+                var bigImage = document.getElementById('imgBig');
+                bigImage.src = e.target.src.replace('small', 'big');
+                bigImage.onerror = function () {
+                    alert('Ошибка! Изображение отсутствует!');
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>

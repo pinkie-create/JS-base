@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 1. Создать функцию, генерирующую шахматную доску. При этом можно использовать любые html-теги по своему желанию.
+    Доска должна быть разлинована соответствующим образом, т.е. чередовать черные и белые ячейки. Строки должны
+    нумероваться числами от 1 до 8, столбцы – латинскими буквами A, B, C, D, E, F, G, H. -->
+
+    <!-- 2. Заполнить созданную таблицу буквами, отвечающими за шахматную фигуру, например К – король, Ф – ферзь и т.п.,
+    причем все фигуры должны стоять на своих местах и быть соответственно черными и белыми. -->
+
+    <div></div>
+    <script>
+        var table = document.createElement('table');
+        var array = ['', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', ''];
+        var number = ['', '1', '2', '3', '4', '5', '6', '7', '8', ''];
+        var reverseNumber = number.reverse();
+        var chessPieceWhite = ['', 'Л', 'К', 'С', 'Ф', 'К', 'С', 'К', 'Л'];
+        var chessPawnWhite = ['п'];
+        var chessPieceBlack = ['', 'Л', 'К', 'С', 'Ф', 'К', 'С', 'К', 'Л'];
+        var chessPawnBlack = ['п'];
+
+        function chessDesk() {
+            for (var i = 0; i < 10; ++i) {
+                var tr = document.createElement('tr');
+                table.append(tr);
+                for (var j = 0; j < 10; ++j) {
+                    var td = document.createElement('td');
+                    tr.append(td);
+                    td.innerHTML = (i + 1) + j;
+
+                    if (td.innerHTML % 2 == 0) {
+                        td.style.backgroundColor = "#333333";
+                    }
+
+                    if (i == 9 && 0 <= j <= 9) { // Последняя буквенная строка координат
+                        td.innerHTML = array[j];
+                    } else if (i == 0 && 0 <= j <= 9) { // Первая буквенная строка координат
+                        td.innerHTML = array[j];
+                    } else if (i <= 8 && j == 0) { //Левый цифровой столбец
+                        td.innerHTML = reverseNumber[i];
+                    } else if (i <= 8 && j == 9) { //Правый цифровой столбец
+                        td.innerHTML = reverseNumber[i];
+                    } else if (i == 1 && 1 <= j && j < 9) {
+                        td.innerHTML = chessPieceBlack[j];
+                    } else if (i == 2 && 1 <= j && j < 9) {
+                        td.innerHTML = chessPawnBlack;
+                    } else if (i == 7 && 1 <= j && j < 9) {
+                        td.innerHTML = chessPawnWhite;
+                        td.style.color = '#cccccc';
+                    } else if (i == 8 && 1 <= j && j < 9) {
+                        td.innerHTML = chessPieceWhite[j];
+                        td.style.color = '#cccccc';
+                    } else {
+                        td.innerHTML = '';
+                    }
+                }
+            }
+            document.querySelector('div').append(table);
+        }
+        chessDesk();
+    </script>
+
+</body>
+
+</html>

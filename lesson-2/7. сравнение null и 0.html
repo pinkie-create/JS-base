@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 2</title>
+</head>
+
+<body>
+    <!-- 7. *Сравнить null и 0. Попробуйте объяснить результат. -->
+    <script>
+        'use strict'
+        console.log(null > 0); //false
+        console.log(null < 0); //false
+        console.log(null >= 0); //true
+        console.log(null <= 0); //true
+        console.log("" <= 0); //true
+        console.log("" >= 0); //true
+        console.log(null == 0); //false
+        typeof (0); //number
+        typeof ("null"); //object
+
+        // При сравнении "null > 0" и "null < 0" играет роль то, что оба эти значения не являются ни Boolean, ни String, ни Undefined.Значит, при проверке больше или меньше, о преобразуется в Number со значением "0".Выводится результат "false" потому, что они равны.Значения "null" и "0" являются разными типами данных, потому что при проверке их cтрогого равенства возвращается значение "false"
+    </script>
+</body>
+
+</html>

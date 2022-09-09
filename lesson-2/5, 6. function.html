@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Урок 2</title>
+</head>
+
+<body>
+    <!-- 5. Реализовать основные 4 арифметические операции в виде функций с двумя параметрами. Обязательно использовать
+    оператор return. -->
+    <script>
+        'use strict'
+
+        function sum(a, b) {
+            return a + b;
+        };
+
+        function minus(a, b) {
+            return a - b;
+        };
+
+        function multiplication(a, b) {
+            return a * b;
+        };
+
+        function division(a, b) {
+            return a / b;
+        };
+
+        //    6. Реализовать функцию с тремя параметрами: function mathOperation(arg1, arg2, operation), где arg1, arg2 – значения
+        //     аргументов, operation – строка с названием операции. В зависимости от переданного значения операции выполнить одну
+        //     из арифметических операций (использовать функции из пункта 5) и вернуть полученное значение (использовать switch)
+
+        function mathOperation(arg1, arg2, operation) {
+            switch (operation) {
+                case '+':
+                    return sum(arg1, arg2);
+                case '-':
+                    return minus(arg1, arg2);
+                case '*':
+                    return multiplication(arg1, arg2);
+                case '/':
+                    return division(arg1, arg2);
+            }
+        }
+        let arg1 = +prompt('Введите первое число');
+        let arg2 = +prompt('Введите второе число');
+        document.write(`Сумма чисел равна: ${mathOperation(arg1, arg2, "+")}<br />`);
+        document.write(`Разность чисел равна: ${mathOperation(arg1, arg2, "-")}<br />`);
+        document.write(`Произведение чисел равно: ${mathOperation(arg1, arg2, "*")}<br />`);
+        document.write(`Деление чисел равно: ${mathOperation(arg1, arg2, "/")}<br />`);
+    </script>
+</body>
+
+</html>

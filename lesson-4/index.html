@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <!-- 1. Написать функцию, преобразующую число в объект. Передавая на вход число от 0 до 999, мы должны получить на выходе
+    объект, в котором в соответствующих свойствах описаны единицы, десятки и сотни. Например, для числа 245 мы должны
+    получить следующий объект: {‘единицы’: 5, ‘десятки’: 4, ‘сотни’: 2}. Если число превышает 999, необходимо выдать
+    соответствующее сообщение с помощью console.log и вернуть пустой объект. -->
+
+    <script>
+        function getDigitsOfNumber(num) {
+            if (!Number.isInteger(num) || num < 0 || num > 999) {
+                console.log('Значение аргумента должно быть целым числом в диапазоне [0 .. 999].');
+                return {};
+            }
+
+            return {
+                units: num % 10,
+                hundereds: Math.floor(num / 100),
+                tens: Math.floor(num / 10) % 10,
+            };
+        }
+
+        console.log(getDigitsOfNumber(123));
+    </script>
+
+    <!-- 2. Для игры КВЕСТ, рассмотренной в конце урока, добавить возможность вывода хода номер n (номер задается
+    пользователем) -->
+
+    <script>
+        var works = {
+            a00: 'Вопрос 1\n' +
+                'Вы живёте в тихой и уютной деревеньке на окрайне страны.\n' +
+                'Здесь есть практчески всё: речка, лес, горы, озеро, луга и поля, есть даже школа в соседнем селе.\n' +
+                'Сейчас начало лета, воскресенье, раннее утро, Вы просыпаетесь и собираетесь ...\n',
+            a0: 2,
+            a1: '1 - Поспать до обеда\n',
+            a2: '2 - Пойти прогуляться\n',
+            b00: 'Вопрос 2\n' +
+                'Вы решили поспать до обеда.\n' +
+                'После того как Вы проснулись первое, что вы ощутили, это приятный запах, который шёл с кухни.\n' +
+                'После Вы замечаете, какая за окном прекрасная погода, и Вы думаете ...\n',
+            b0: 2,
+            b1: '1 - Пойти прогуляться\n',
+            b2: '2 - Пойти пообедать\n',
+            c00: 'Вопрос 3\n' +
+                'Вы решили пойти прогуляться.\n' +
+                'Вы выходите из своего дома и видите прекрасный рассвет, блики солнца так и играют на озёрной глади.\n' +
+                'Вы решаете дойти до озера, полюбоваться его красотойю\n' +
+                'С одной стороны тропинки Вы видите пшеничное поле, за которым виднеется лес.\n' +
+                'С другой стороны течёт речка, а в далеке виднеются горы.\n' +
+                'Вы наслаждаетесь пейзажами и не замечаете как летит время.\n' +
+                'Домой Вы приходите только к обеду, но до обеда ещё есть время и Вы решаете ...\n',
+            c0: 2,
+            c1: '1 - Подождать обед в столовой\n',
+            c2: '2 - Поколоть дров перед обедом\n',
+            d00: 'Вопрос 3\n' +
+                'Вы решили пойти пойти пообедать.\n' +
+                'Вы пришли в столовую и увидели, что никто не готовит обед\n' +
+                'Вы в негодовании и решаете...\n',
+            d0: 2, // кол-во ответов
+            d1: '1 - Громко стучать кулаком по столу, требуя обеда\n',
+            d2: '2 - Поискать что-нибудь вкусное в холодильнике \n',
+        };
+
+        var occur, ok;
+        var answerNumber = [];
+        var answerText = [];
+        var questions = [];
+
+        do { //Выводим первый вопрос
+            ok = false;
+            occur = +prompt(works.a00 + works.a1 + works.a2 + '-1 - Выход из игры');
+
+            if (occur == -1) {
+                break;
+            } else {
+                ok = isAnswer(works.a0,
+                    occur); //Функция, которая принимает количество вариантов ответа и ответ пользователя
+                if (occur > 2) {
+                    answerNumber.push();
+                } else {
+                    questions.push(works.a00); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                    answerNumber.push(occur); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                }
+                if (occur == 1) {
+                    answerText.push(works.a1);
+                } else if (occur == 2) {
+                    answerText.push(works.a2);
+                } else {
+                    answerText.push();
+                }
+            }
+        } while (!ok);
+        switch (occur) {
+            case 1: // Первое действие  - если в первом окне ввели 1 то открываем серию окон - окно 2
+                do {
+                    ok = false;
+                    occur = +prompt(works.b00 + works.b1 + works.b2 + '-1 - Выход из игры');
+                    if (occur == -1) {
+                        break;
+                    } else {
+                        ok = isAnswer(works.b0,
+                            occur); //Функция, которая принимает количество вариантов ответа и ответ пользователя
+                        if (occur > 2) {
+                            answerNumber.push();
+                        } else {
+                            questions.push(works.b00); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                            answerNumber.push(occur); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                        }
+                        if (occur == 1) {
+                            answerText.push(works.b1);
+                        } else if (occur == 2) {
+                            answerText.push(works.b2);
+                        } else {
+                            answerText.push();
+                        }
+                    }
+                } while (!ok);
+                switch (occur) {
+                    case 1: // Второе действие, если во 2 окне ввели 1 то переходим на 4 окно
+                        do {
+                            ok = false;
+                            occur = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                            if (occur == -1) {
+                                break;
+                            } else {
+                                ok = isAnswer(works.d0,
+                                    occur
+                                ); //Функция, которая принимает количество вариантов ответа и ответ пользователя
+                                if (occur > 2) {
+                                    answerNumber.push();
+                                } else {
+                                    questions.push(works.d00); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                                    answerNumber.push(occur); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                                }
+                                if (occur == 1) {
+                                    answerText.push(works.d1);
+                                } else if (occur == 2) {
+                                    answerText.push(works.d2);
+                                } else {
+                                    answerText.push();
+                                }
+                            }
+                        } while (!ok);
+                        break;
+                    case 2: // Второе действие   Если ввели 2 то также переходим на 4 окно
+                        do {
+                            ok = false;
+                            occur = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                            if (occur == -1) {
+                                break;
+                            } else {
+                                ok = isAnswer(works.d0, occur);
+                                if (occur > 2) {
+                                    answerNumber.push();
+                                } else {
+                                    questions.push(works.d00); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                                    answerNumber.push(occur); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                                }
+                                if (occur == 1) {
+                                    answerText.push(works.d1);
+                                } else if (occur == 2) {
+                                    answerText.push(works.d2);
+                                } else {
+                                    answerText.push();
+                                }
+                            }
+                        } while (!ok);
+
+                        break;
+                    case -1: // Второе действие
+                        break;
+                    default:
+                        alert('Ошибка');
+                }
+                break;
+            case 2: // Первое действие    Если в 1 окне ввели 2 то переходим к 3 окну
+                do {
+                    ok = false;
+                    occur = +prompt(works.c00 + works.c1 + works.c2 + '-1 - Выход из игры');
+                    if (occur == -1) {
+                        break;
+                    } else {
+                        ok = isAnswer(works.c0, occur);
+                        if (occur > 2) {
+                            answerNumber.push();
+                        } else {
+                            questions.push(works.c00); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                            answerNumber.push(occur); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                        }
+                        if (occur == 1) {
+                            answerText.push(works.c1);
+                        } else if (occur == 2) {
+                            answerText.push(works.c2);
+                        } else {
+                            answerText.push();
+                        }
+                    }
+                } while (!ok);
+                switch (occur) {
+                    case 1: // Второе действие
+                        do {
+                            ok = false;
+                            occur = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                            if (occur == -1) {
+                                break;
+                            } else {
+                                ok = isAnswer(works.d0, occur);
+                                if (occur > 2) {
+                                    answerNumber.push();
+                                } else {
+                                    questions.push(works.d00); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                                    answerNumber.push(occur); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                                }
+                                if (occur == 1) {
+                                    answerText.push(works.d1);
+                                } else if (occur == 2) {
+                                    answerText.push(works.d2);
+                                } else {
+                                    answerText.push();
+                                }
+                            }
+                        } while (!ok);
+
+                        break;
+                    case 2: // Второе действие
+                        do {
+                            ok = false;
+                            occur = +prompt(works.d00 + works.d1 + works.d2 + '-1 - Выход из игры');
+                            if (occur == -1) {
+                                break;
+                            } else {
+                                ok = isAnswer(works.d0, occur);
+                                if (occur > 2) {
+                                    answerNumber.push();
+                                } else {
+                                    questions.push(works.d00); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                                    answerNumber.push(occur); //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+                                }
+                                if (occur == 1) {
+                                    answerText.push(works.d1);
+                                } else if (occur == 2) {
+                                    answerText.push(works.d2);
+                                } else {
+                                    answerText.push();
+                                }
+                            }
+                        } while (!ok);
+
+                        break;
+                    case -1: // Второе действие
+                        break;
+                    default:
+                        alert('Ошибка');
+                }
+                break;
+            case -1: // Первое действие
+                break;
+            default:
+                alert('Ошибка');
+        }
+        alert('Спасибо за игру');
+
+        //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+        console.log(questions[0] + '\n' + questions[1] + '\n' +
+            questions[2]);
+        console.log('Номера Ваших ответов на вопросы: ' + answerNumber);
+        console.log(answerText[0] + '\n' + answerText[1] + '\n' + answerText[2]);
+
+        var userAnswer = prompt('Введите номер вопроса для вывода вашего ответа на данный вопрос');
+        while (userAnswer == '' || userAnswer == 0 || isNaN(userAnswer)) {
+            userAnswer = prompt('Введите номер вопроса для вывода проверочных данных');
+        }
+
+
+        if (userAnswer <= 3) {
+            var aUserAnswer = userAnswer;
+            var qUserAnswer = --userAnswer;
+            alert(questions[qUserAnswer] + '\nВаш ответ на ' +
+                aUserAnswer + ' вопрос: ' + answerText[qUserAnswer]);
+        } else {
+            alert('Вы ввели некорректный номер вопроса');
+        }
+        //? РЕДАКТИРУЕМАЯ ЧАСТЬ----------------
+        //------------------------------------------
+        function isAnswer(q, occur) {
+            if (isNaN(occur) || !isFinite(occur)) {
+                alert('Вы ввели недопустимый символ');
+                return false;
+            } else if (occur < 1 || occur > q) {
+                alert('Ваше число выходит из допустимого диапозона');
+                return false;
+            }
+            return true;
+        }
+    </script>
+
+</body>
+
+</html>
